@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <div action="/" method="GET">
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for row, price in rows_and_prices %}
+                    <tr>
+                        <td>{{ row.symbol }}</td>
+                        <td>{{ row.shares }}</td>
+                        <td>{{ price | usd }}</td>
+                        <td>{{(row.shares * price) | usd }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Cash</td>
+                    <td>{{ cash | usd }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>TOTAL</td>
+                    <td>{{ total | usd }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
